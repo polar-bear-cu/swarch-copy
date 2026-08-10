@@ -24,6 +24,15 @@ docsRouter.use(
 );
 
 docsRouter.use(
+  "/code-runner-docs.json",
+  createProxyMiddleware({
+    target: env.CODE_RUNNER_SERVICE_URL,
+    changeOrigin: true,
+    pathRewrite: { "^/code-runner-docs.json": "/docs.json" },
+  }),
+);
+
+docsRouter.use(
   "/docs",
   swaggerUi.serve,
   swaggerUi.setup(undefined, {
@@ -32,6 +41,7 @@ docsRouter.use(
       urls: [
         { url: "/room-docs.json", name: "Room Service" },
         { url: "/auth-docs.json", name: "Auth Service" },
+        { url: "/code-runner-docs.json", name: "Code Runner Service" },
       ],
     },
   }),
