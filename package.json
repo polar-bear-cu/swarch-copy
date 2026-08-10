@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "cd services/code-runner && go mod download",
     "format": "prettier --write . && gofmt -w services/code-runner && echo [code-runner] gofmt done",
-    "format:check": "prettier --check . && test -z \"$(gofmt -l services/code-runner)\" && echo [code-runner] gofmt OK",
+    "format:check": "prettier --check . && node scripts/code-runner-gofmt.ts",
     "lint": "npm --prefix frontend run lint && npm --prefix services/gateway run lint && npm --prefix services/auth run lint && npm --prefix services/room run lint && cd services/code-runner && go vet ./... && cd ../.. && echo [code-runner] go vet OK",
     "prepare": "husky",
     "dev:frontend": "npm --prefix frontend run dev",
@@ -24,9 +24,11 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@types/node": "^26.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^6.0.3"
   },
   "lint-staged": {
     "frontend/**/*.{ts,tsx}": [
