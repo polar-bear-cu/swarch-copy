@@ -1,9 +1,12 @@
 import express from "express";
+import cors from "cors";
 import { swaggerSpec } from "./docs/swagger";
+import { env } from "./config/env";
 
 const app = express();
-const PORT = 8001;
+const PORT = env.PORT;
 
+app.use(cors());
 app.use(express.json());
 
 /**
