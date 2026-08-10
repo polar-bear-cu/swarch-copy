@@ -1,13 +1,34 @@
 {
   "scripts": {
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "npm --prefix frontend run lint && npm --prefix services/gateway run lint && npm --prefix services/auth run lint && npm --prefix services/room run lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.3.3"
+  },
+  "lint-staged": {
+    "frontend/**/*.{ts,tsx}": [
+      "npm --prefix frontend run lint -- --fix"
+    ],
+    "services/gateway/**/*.ts": [
+      "npm --prefix services/gateway run lint -- --fix"
+    ],
+    "services/auth/**/*.ts": [
+      "npm --prefix services/auth run lint -- --fix"
+    ],
+    "services/room/**/*.ts": [
+      "npm --prefix services/room run lint -- --fix"
+    ],
+    "**/*.{ts,tsx,js,jsx,json,css,md}": [
+      "prettier --write"
+    ]
   }
 }

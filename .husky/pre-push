@@ -1,0 +1,6 @@
+npm run format:check &&
+npm run lint &&
+cd services/gateway && npx tsc --noEmit -p tsconfig.json && cd ../.. &&
+cd services/auth && npx tsc --noEmit -p tsconfig.json && cd ../.. &&
+cd services/room && npx tsc --noEmit -p tsconfig.json && cd ../.. &&
+cd frontend && npx tsc -b --noEmit && cd ..

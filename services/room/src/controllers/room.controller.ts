@@ -11,12 +11,9 @@ const getRoomUseCase = new GetRoomUseCase(roomRepository);
 const deleteRoomUseCase = new DeleteRoomUseCase(roomRepository);
 
 function handleError(err: unknown, res: Response) {
-  if (err instanceof ValidationError)
-    return res.status(400).json({ error: err.message });
-  if (err instanceof NotFoundError)
-    return res.status(404).json({ error: err.message });
-  if (err instanceof ForbiddenError)
-    return res.status(403).json({ error: err.message });
+  if (err instanceof ValidationError) return res.status(400).json({ error: err.message });
+  if (err instanceof NotFoundError) return res.status(404).json({ error: err.message });
+  if (err instanceof ForbiddenError) return res.status(403).json({ error: err.message });
   res.status(500).json({ error: "internal error" });
 }
 
