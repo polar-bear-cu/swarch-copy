@@ -26,6 +26,8 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
     "@types/node": "^26.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
