@@ -1,6 +1,14 @@
 package config
 
-import "os"
+import (
+	"os"
+
+	"github.com/joho/godotenv"
+)
+
+func init() {
+	_ = godotenv.Load("../../.env")
+}
 
 func Port() string {
 	var p = os.Getenv("CODE_RUNNER_PORT")
