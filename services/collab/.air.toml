@@ -1,0 +1,15 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "cmd /c \"swag init -g cmd/main.go -o docs --outputTypes json && go build -o ./tmp/main.exe ./cmd\""
+  entrypoint = ["./tmp/main.exe"]
+  include_ext = ["go"]
+  exclude_dir = ["tmp", "docs"]
+  delay = 1000
+
+[log]
+  time = false
+
+[misc]
+  clean_on_exit = true

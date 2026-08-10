@@ -24,6 +24,15 @@ docsRouter.use(
 );
 
 docsRouter.use(
+  "/collab-docs.json",
+  createProxyMiddleware({
+    target: env.COLLAB_SERVICE_URL,
+    changeOrigin: true,
+    pathRewrite: { "^/collab-docs.json": "/docs.json" },
+  }),
+);
+
+docsRouter.use(
   "/code-runner-docs.json",
   createProxyMiddleware({
     target: env.CODE_RUNNER_SERVICE_URL,
@@ -39,8 +48,9 @@ docsRouter.use(
     explorer: true,
     swaggerOptions: {
       urls: [
-        { url: "/room-docs.json", name: "Room Service" },
         { url: "/auth-docs.json", name: "Auth Service" },
+        { url: "/room-docs.json", name: "Room Service" },
+        { url: "/collab-docs.json", name: "Collab Service" },
         { url: "/code-runner-docs.json", name: "Code Runner Service" },
       ],
     },

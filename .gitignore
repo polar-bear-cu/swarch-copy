@@ -6,3 +6,5 @@ dist/
 
 services/code-runner/docs/
 services/code-runner/tmp/
+services/collab/docs/
+services/collab/tmp/

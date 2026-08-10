@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/copy/code-runner/internal/config"
-	"github.com/copy/code-runner/internal/handlers"
+	"github.com/copy/collab/internal/config"
+	"github.com/copy/collab/internal/handlers"
 )
 
-// @title        CoPy Code Runner Service
+// @title        CoPy Collab Service
 // @version      1.0
-// @host         localhost:8005
+// @host         localhost:8004
 // @BasePath     /
 func main() {
 	port := config.Port()
@@ -21,7 +21,10 @@ func main() {
 
 	http.HandleFunc("/health", handlers.GetHealth(port))
 
-	fmt.Printf("[code-runner] :%s\n", port)
+	// TODO: gRPC server :8003
+	// TODO: WebSocket server :8004
+
+	fmt.Printf("[collab] :%s\n", port)
 	http.ListenAndServe(":"+port, withCORS(http.DefaultServeMux))
 }
 
