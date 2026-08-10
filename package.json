@@ -1,5 +1,14 @@
 {
+  "name": "copy",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "services/gateway",
+    "services/auth",
+    "services/room"
+  ],
   "scripts": {
+    "postinstall": "cd services/code-runner && go mod download",
     "format": "prettier --write . && gofmt -w services/code-runner && echo [code-runner] gofmt done",
     "format:check": "prettier --check . && test -z \"$(gofmt -l services/code-runner)\" && echo [code-runner] gofmt OK",
     "lint": "npm --prefix frontend run lint && npm --prefix services/gateway run lint && npm --prefix services/auth run lint && npm --prefix services/room run lint && cd services/code-runner && go vet ./... && cd ../.. && echo [code-runner] go vet OK",
@@ -8,7 +17,7 @@
     "dev:gateway": "npm --prefix services/gateway run dev",
     "dev:auth": "npm --prefix services/auth run dev",
     "dev:room": "npm --prefix services/room run dev",
-    "dev:code-runner": "cd services/code-runner && swag init -g cmd/main.go -o docs --outputTypes json && go run cmd/main.go"
+    "dev:code-runner": "cd services/code-runner && air"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

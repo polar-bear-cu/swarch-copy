@@ -5,3 +5,4 @@ dist/
 *.log
 
 services/code-runner/docs/
+services/code-runner/tmp/

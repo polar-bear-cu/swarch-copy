@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import { swaggerSpec } from "./docs/swagger";
-import { env } from "./config/env";
+import { swaggerSpec } from "@/docs/swagger";
+import { env } from "@/config/env";
+import { getHealth } from "@/controllers/health.controller";
 
 const app = express();
 const PORT = env.PORT;
@@ -18,9 +19,7 @@ app.use(express.json());
  *       200:
  *         description: Service is up
  */
-app.get("/health", (_, res) => {
-  res.json({ service: "auth", status: "ok", port: PORT });
-});
+app.get("/health", getHealth);
 
 app.get("/docs.json", (_, res) => res.json(swaggerSpec));
 

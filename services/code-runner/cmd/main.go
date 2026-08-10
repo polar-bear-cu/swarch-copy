@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/copy/code-runner/internal/config"
-	"github.com/copy/code-runner/internal/handler"
+	"github.com/copy/code-runner/internal/handlers"
 )
 
 // @title        CoPy Code Runner Service
@@ -21,7 +21,7 @@ func main() {
 		http.ServeFile(w, r, "docs/swagger.json")
 	})
 
-	http.HandleFunc("/health", handler.GetHealth(port))
+	http.HandleFunc("/health", handlers.GetHealth(port))
 
 	fmt.Printf("[code-runner] :%s\n", port)
 	http.ListenAndServe(":"+port, withCORS(http.DefaultServeMux))

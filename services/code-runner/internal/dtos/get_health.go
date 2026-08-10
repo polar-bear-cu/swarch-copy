@@ -1,4 +1,4 @@
-package dto
+package dtos
 
 type GetHealthResponse struct {
 	Service string `json:"service" example:"code-runner"`

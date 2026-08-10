@@ -1,14 +1,13 @@
 import express, { Request } from "express";
 import type { Socket } from "net";
-import { env } from "./config/env";
-import { docsRouter } from "./docs/router";
-import { authProxy, roomProxy, collabProxy, codeRunnerProxy } from "./proxies";
+import { env } from "@/config/env";
+import { docsRouter } from "@/docs/router";
+import { authProxy, roomProxy, collabProxy, codeRunnerProxy } from "@/proxies";
+import { getHealth } from "@/controllers/health.controller";
 
 const app = express();
 
-app.get("/health", (_, res) => {
-  res.json({ service: "gateway", status: "ok", port: env.PORT });
-});
+app.get("/health", getHealth);
 
 app.use(docsRouter);
 app.use("/auth", authProxy);
