@@ -3,6 +3,7 @@ import MainLayout from "@/layouts/MainLayout";
 import HomePage from "@/pages/HomePage";
 import TestPage from "@/pages/test/TestPage";
 import TestEndpointPage from "@/pages/test/[id]/TestDetailPage";
+import StatusPage from "@/pages/status/StatusPage";
 import { ROUTES } from "./routes";
 
 export const router = createBrowserRouter([
@@ -27,6 +28,14 @@ export const router = createBrowserRouter([
     element: (
       <MainLayout>
         <TestEndpointPage />
+      </MainLayout>
+    ),
+  },
+  {
+    path: ROUTES.STATUS,
+    element: (
+      <MainLayout>
+        <StatusPage />
       </MainLayout>
     ),
   },

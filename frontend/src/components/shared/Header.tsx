@@ -8,6 +8,7 @@ export default function Header() {
       <nav className="flex gap-4">
         <Link to={ROUTES.HOME}>Home</Link>
         <Link to={ROUTES.TEST}>Test</Link>
+        <Link to={ROUTES.STATUS}>Status</Link>
       </nav>
     </header>
   );
