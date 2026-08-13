@@ -1,8 +1,8 @@
-import { RoomRepository } from "../ports/room-repository.port";
+import { RoomInterface } from "../interfaces/room.interface";
 import { NotFoundError } from "../errors";
 
 export class GetRoomUseCase {
-  constructor(private readonly roomRepository: RoomRepository) {}
+  constructor(private readonly roomRepository: RoomInterface) {}
 
   execute(id: string) {
     const room = this.roomRepository.findById(id);

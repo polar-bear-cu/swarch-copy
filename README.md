@@ -57,6 +57,17 @@ npm run dev:code-runner   # :8005
 
 Run whichever service you're working on — no single command starts all (kept simple, no `concurrently` dependency). Health check any service at `http://<host>/health`.
 
+### Run with Docker
+
+Prefer not to install Node/Go/`swag`/`air` locally? The 5 backend services (`gateway`, `auth`, `room`, `collab`, `code-runner`) run in containers with hot reload — edit a file on your host and the service inside the container restarts, same as native dev:
+
+```powershell
+Copy-Item .env.example .env
+docker compose up
+```
+
+Frontend is not containerized — keep running it natively (`npm run dev:frontend`) for the fastest Vite HMR. Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/) only, no local Node/Go toolchain. These are dev-only images (no prod build stage yet).
+
 ### API docs
 
 Every service exposes its own `/docs.json`. Gateway aggregates all into one Swagger UI:

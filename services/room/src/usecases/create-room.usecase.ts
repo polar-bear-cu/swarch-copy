@@ -1,8 +1,8 @@
-import { RoomRepository } from "../ports/room-repository.port";
+import { RoomInterface } from "../interfaces/room.interface";
 import { ValidationError } from "../errors";
 
 export class CreateRoomUseCase {
-  constructor(private readonly roomRepository: RoomRepository) {}
+  constructor(private readonly roomRepository: RoomInterface) {}
 
   execute(name: string, ownerId: string) {
     if (!name || !ownerId) {

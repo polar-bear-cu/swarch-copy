@@ -1,0 +1,11 @@
+**/node_modules
+.git
+frontend/src
+frontend/public
+frontend/index.html
+**/dist
+**/tmp
+**/docs
+*.log
+.env*
+!.env.example

@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { InMemoryRoomRepository } from "../repositories/in-memory-room.repository";
 import { CreateRoomUseCase } from "../usecases/create-room.usecase";
 import { GetRoomUseCase } from "../usecases/get-room.usecase";
 import { DeleteRoomUseCase } from "../usecases/delete-room.usecase";
 import { NotFoundError, ForbiddenError, ValidationError } from "../errors";
+import { RoomRepository } from "../repositories/room.repository";
 
-const roomRepository = new InMemoryRoomRepository();
+const roomRepository = new RoomRepository();
 const createRoomUseCase = new CreateRoomUseCase(roomRepository);
 const getRoomUseCase = new GetRoomUseCase(roomRepository);
 const deleteRoomUseCase = new DeleteRoomUseCase(roomRepository);

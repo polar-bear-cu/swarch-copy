@@ -1,0 +1,112 @@
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
+      target: dev
+    ports:
+      - "${GATEWAY_PORT}:${GATEWAY_PORT}"
+    environment:
+      GATEWAY_PORT: ${GATEWAY_PORT}
+      AUTH_SERVICE_URL: http://auth:${AUTH_PORT}
+      ROOM_SERVICE_URL: http://room:${ROOM_PORT}
+      COLLAB_SERVICE_URL: http://collab:${COLLAB_PORT}
+      CODE_RUNNER_SERVICE_URL: http://code-runner:${CODE_RUNNER_PORT}
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./services/gateway:/app/services/gateway
+    depends_on:
+      auth:
+        condition: service_healthy
+      room:
+        condition: service_healthy
+      collab:
+        condition: service_healthy
+      code-runner:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:${GATEWAY_PORT}/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  auth:
+    build:
+      context: .
+      dockerfile: services/auth/Dockerfile
+      target: dev
+    ports:
+      - "${AUTH_PORT}:${AUTH_PORT}"
+    environment:
+      AUTH_PORT: ${AUTH_PORT}
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./services/auth:/app/services/auth
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:${AUTH_PORT}/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  room:
+    build:
+      context: .
+      dockerfile: services/room/Dockerfile
+      target: dev
+    ports:
+      - "${ROOM_PORT}:${ROOM_PORT}"
+    environment:
+      ROOM_PORT: ${ROOM_PORT}
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./services/room:/app/services/room
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:${ROOM_PORT}/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  collab:
+    build:
+      context: services/collab
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "${COLLAB_PORT}:${COLLAB_PORT}"
+    environment:
+      COLLAB_PORT: ${COLLAB_PORT}
+    volumes:
+      - ./services/collab:/app
+      - collab_tmp:/app/tmp
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:${COLLAB_PORT}/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  code-runner:
+    build:
+      context: services/code-runner
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "${CODE_RUNNER_PORT}:${CODE_RUNNER_PORT}"
+    environment:
+      CODE_RUNNER_PORT: ${CODE_RUNNER_PORT}
+    volumes:
+      - ./services/code-runner:/app
+      - code_runner_tmp:/app/tmp
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:${CODE_RUNNER_PORT}/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  collab_tmp:
+  code_runner_tmp:
