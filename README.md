@@ -17,11 +17,7 @@ Microservices behind single gateway. Node/TypeScript for business-logic services
 
 All traffic goes through **gateway** (`/auth`, `/rooms`, `/collab`, `/run`). Services not meant to be called directly except local debugging.
 
-Structure depth matches each service's real complexity:
-
-- **room** — full Clean Architecture: `entities/` → `usecases/` → `ports/` (interfaces) → `repositories/` (implementations), plus `controllers/`, `routes/`, `dtos/`. Business rules (e.g. only owner can delete a room) live in `usecases/`, never controllers.
-- **auth**, **gateway** — flat (`config/`, `controllers/`, `dtos/`, `docs/`). No `usecases/`/`ports/` yet — no real business logic beyond health check and routing.
-- **code-runner**, **collab** (Go) — `cmd/main.go` (wiring only), `internal/config`, `internal/handlers`, `internal/dtos`. Same reasoning: usecases layer added once real feature (Docker sandbox, gRPC sync) lands.
+Gateway strips its mount prefix before forwarding (`/rooms/xyz` → service sees `/xyz`) — downstream services are written root-relative and don't know about the gateway's path scheme. Any new route added to a service is automatically reachable through the gateway with no proxy changes needed.
 
 ## Setup
 
