@@ -9,7 +9,7 @@
     "services/room"
   ],
   "scripts": {
-    "postinstall": "cd services/code-runner && go mod download && cd ../collab && go mod download",
+    "postinstall": "node scripts/postinstall.ts",
     "format": "prettier --write . && gofmt -w services/code-runner services/collab && echo [code-runner, collab] gofmt done",
     "format:check": "prettier --check . && node scripts/check-gofmt.ts",
     "lint": "npm --prefix frontend run lint && npm --prefix services/gateway run lint && npm --prefix services/auth run lint && npm --prefix services/room run lint && cd services/code-runner && go vet ./... && cd ../collab && go vet ./... && cd ../.. && echo [code-runner, collab] go vet OK",

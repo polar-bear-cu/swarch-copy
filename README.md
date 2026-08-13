@@ -30,10 +30,8 @@ Prerequisites:
 - [Node.js](https://nodejs.org/) 20+
 - [Go](https://go.dev/) 1.22+
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) — required for `code-runner`'s sandbox
-- [swag](https://github.com/swaggo/swag) CLI — `go install github.com/swaggo/swag/cmd/swag@latest`
-- [air](https://github.com/air-verse/air) CLI — `go install github.com/air-verse/air@latest`
 
-Make sure `$(go env GOPATH)/bin` is on `PATH`.
+`swag`/`air` (used for API doc generation and Go hot-reload) do **not** need manual install — `npm install` installs them automatically if missing (see below). You do need `$(go env GOPATH)/bin` on your `PATH` for your shell to find them afterward.
 
 ```powershell
 git clone <repo-url>
@@ -42,7 +40,7 @@ Copy-Item .env.example .env
 npm install
 ```
 
-`npm install` uses npm workspaces — installs `frontend` + all Node services in one pass. A `postinstall` hook runs `go mod download` for both Go services. `swag`/`air` still need global install (one-time, see prerequisites).
+`npm install` uses npm workspaces — installs `frontend` + all Node services in one pass. A `postinstall` hook ([scripts/postinstall.ts](scripts/postinstall.ts)) runs `go mod download` for both Go services, then `go install`s `swag`/`air` if they're not already on `PATH`. If `$(go env GOPATH)/bin` itself isn't on `PATH`, the hook prints a warning with the fix — it can't add it for you since a fresh terminal is needed for a `PATH` change to take effect.
 
 `.env` shape: shared `BASE_SERVICE_URL` (default `http://localhost`) + per-service `<NAME>_PORT`. Gateway builds each proxy target itself as `${BASE_SERVICE_URL}:${PORT}`.
 
