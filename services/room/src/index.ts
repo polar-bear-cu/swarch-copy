@@ -24,6 +24,6 @@ app.get("/health", (_, res) => {
 });
 
 app.get("/docs.json", (_, res) => res.json(swaggerSpec));
-app.use("/rooms", roomRoutes);
+app.use("/", roomRoutes);
 
 app.listen(PORT, () => console.log(`[room] :${PORT}`));

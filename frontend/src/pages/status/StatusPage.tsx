@@ -1,8 +1,8 @@
 import { useServicesHealth } from "@/hooks/useServicesHealth";
-import { SERVICE_TARGETS } from "@/config/services";
+import { ENV } from "@/config/env";
 
 export default function StatusPage() {
-  const { results, checkedAt, recheck } = useServicesHealth();
+  const { results, checkedAt, recheck, serviceNames } = useServicesHealth();
 
   return (
     <section>
@@ -31,12 +31,14 @@ export default function StatusPage() {
           </tr>
         </thead>
         <tbody>
-          {SERVICE_TARGETS.map((service) => {
-            const result = results[service.name];
+          {serviceNames.map((name) => {
+            const result = results[name];
             return (
-              <tr key={service.name} className="border-t">
-                <td className="p-2 font-medium">{service.name}</td>
-                <td className="p-2 text-gray-500">{service.baseURL}</td>
+              <tr key={name} className="border-t">
+                <td className="p-2 font-medium">{name}</td>
+                <td className="p-2 text-gray-500">
+                  {result ? ENV.GATEWAY_SERVICE_URL + result.path : "—"}
+                </td>
                 <td className="p-2">
                   {!result && <span className="text-gray-400">checking…</span>}
                   {result?.state === "ok" && <span className="text-green-600">● up</span>}

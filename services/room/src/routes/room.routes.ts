@@ -5,7 +5,7 @@ export const roomRoutes = Router();
 
 /**
  * @openapi
- * /rooms:
+ * /:
  *   post:
  *     summary: Create a room
  *     requestBody:
@@ -30,7 +30,7 @@ roomRoutes.post("/", roomController.create);
 
 /**
  * @openapi
- * /rooms/{id}:
+ * /{id}:
  *   get:
  *     summary: Get a room by id
  *     parameters:
@@ -49,7 +49,7 @@ roomRoutes.get("/:id", roomController.getById);
 
 /**
  * @openapi
- * /rooms/{id}:
+ * /{id}:
  *   delete:
  *     summary: Delete a room (owner only)
  *     parameters:

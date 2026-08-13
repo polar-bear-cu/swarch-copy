@@ -1,8 +1,3 @@
-export interface ServiceTarget {
-  name: string;
-  baseURL: string;
-}
-
 export interface ServiceHealth {
   service: string;
   status: string;
@@ -10,5 +5,5 @@ export interface ServiceHealth {
 }
 
 export type HealthCheckResult =
-  | { state: "ok"; service: string; latencyMs: number; data: ServiceHealth }
-  | { state: "error"; service: string; latencyMs: number; message: string };
+  | { state: "ok"; service: string; path: string; latencyMs: number; data: ServiceHealth }
+  | { state: "error"; service: string; path: string; latencyMs: number; message: string };

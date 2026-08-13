@@ -1,5 +1,7 @@
 import axios from "axios";
+import { ENV } from "@/config/env";
 
-export function createHttpClient(baseURL: string) {
-  return axios.create({ baseURL, timeout: 3000 });
-}
+export const httpClient = axios.create({
+  baseURL: ENV.GATEWAY_SERVICE_URL,
+  timeout: 3000,
+});
