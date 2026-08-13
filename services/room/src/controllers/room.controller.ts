@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CreateRoomUseCase } from "../usecases/create-room.usecase";
 import { GetRoomUseCase } from "../usecases/get-room.usecase";
+import { GetAllRoomsUseCase } from "../usecases/get-all-rooms.usecase";
 import { DeleteRoomUseCase } from "../usecases/delete-room.usecase";
 import { NotFoundError, ForbiddenError, ValidationError } from "../errors";
 import { RoomRepository } from "../repositories/room.repository";
@@ -8,6 +9,7 @@ import { RoomRepository } from "../repositories/room.repository";
 const roomRepository = new RoomRepository();
 const createRoomUseCase = new CreateRoomUseCase(roomRepository);
 const getRoomUseCase = new GetRoomUseCase(roomRepository);
+const getAllRoomsUseCase = new GetAllRoomsUseCase(roomRepository);
 const deleteRoomUseCase = new DeleteRoomUseCase(roomRepository);
 
 function handleError(err: unknown, res: Response) {
@@ -25,6 +27,10 @@ export const roomController = {
     } catch (err) {
       handleError(err, res);
     }
+  },
+
+  getAll(_req: Request, res: Response) {
+    res.json(getAllRoomsUseCase.execute());
   },
 
   getById(req: Request, res: Response) {

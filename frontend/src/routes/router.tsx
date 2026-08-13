@@ -4,6 +4,7 @@ import HomePage from "@/pages/HomePage";
 import TestPage from "@/pages/test/TestPage";
 import TestEndpointPage from "@/pages/test/[id]/TestDetailPage";
 import StatusPage from "@/pages/status/StatusPage";
+import RoomPage from "@/pages/room/RoomPage";
 import { ROUTES } from "./routes";
 
 export const router = createBrowserRouter([
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
     element: (
       <MainLayout>
         <StatusPage />
+      </MainLayout>
+    ),
+  },
+  {
+    path: ROUTES.ROOM,
+    element: (
+      <MainLayout>
+        <RoomPage />
       </MainLayout>
     ),
   },

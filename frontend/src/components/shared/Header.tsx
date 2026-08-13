@@ -9,6 +9,7 @@ export default function Header() {
         <Link to={ROUTES.HOME}>Home</Link>
         <Link to={ROUTES.TEST}>Test</Link>
         <Link to={ROUTES.STATUS}>Status</Link>
+        <Link to={ROUTES.ROOM}>Room</Link>
       </nav>
     </header>
   );

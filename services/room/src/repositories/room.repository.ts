@@ -15,6 +15,10 @@ export class RoomRepository implements RoomInterface {
     return this.rooms.get(id);
   }
 
+  findAll(): Room[] {
+    return Array.from(this.rooms.values());
+  }
+
   deleteById(id: string): boolean {
     return this.rooms.delete(id);
   }

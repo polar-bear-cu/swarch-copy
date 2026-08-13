@@ -3,4 +3,5 @@ export const ROUTES = {
   TEST: "/test",
   TEST_ENDPOINT: "/test/:id",
   STATUS: "/status",
+  ROOM: "/room",
 } as const;

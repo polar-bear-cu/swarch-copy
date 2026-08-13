@@ -30,6 +30,17 @@ roomRoutes.post("/", roomController.create);
 
 /**
  * @openapi
+ * /:
+ *   get:
+ *     summary: List all rooms
+ *     responses:
+ *       200:
+ *         description: List of rooms
+ */
+roomRoutes.get("/", roomController.getAll);
+
+/**
+ * @openapi
  * /{id}:
  *   get:
  *     summary: Get a room by id
