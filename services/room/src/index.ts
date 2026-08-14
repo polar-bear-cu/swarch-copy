@@ -3,6 +3,7 @@ import cors from "cors";
 import { roomRoutes } from "@/routes/room.routes";
 import { swaggerSpec } from "@/docs/swagger";
 import { env } from "@/config/env";
+import { getHealth } from "@/controllers/health.controller";
 
 const app = express();
 const PORT = env.PORT;
@@ -19,9 +20,7 @@ app.use(express.json());
  *       200:
  *         description: Service is up
  */
-app.get("/health", (_, res) => {
-  res.json({ service: "room", status: "ok", port: PORT });
-});
+app.get("/health", getHealth);
 
 app.get("/docs.json", (_, res) => res.json(swaggerSpec));
 app.use("/", roomRoutes);
