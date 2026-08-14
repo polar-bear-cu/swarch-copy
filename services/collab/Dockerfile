@@ -10,7 +10,7 @@ FROM deps AS dev
 RUN go install github.com/air-verse/air@latest && \
     go install github.com/swaggo/swag/cmd/swag@latest
 COPY . .
-RUN chown -R app:app /app /go
+RUN mkdir -p tmp && chown -R app:app /app /go
 USER app
 EXPOSE 8004
 CMD ["air", "-c", ".air.docker.toml"]
