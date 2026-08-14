@@ -1,4 +1,4 @@
-import { RoomInterface } from "../interfaces/room.interface";
+import { RoomInterface } from "@/interfaces/room.interface";
 
 export class GetAllRoomsUseCase {
   constructor(private readonly roomRepository: RoomInterface) {}

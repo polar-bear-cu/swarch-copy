@@ -1,5 +1,5 @@
-import { RoomInterface } from "../interfaces/room.interface";
-import { NotFoundError, ForbiddenError } from "../errors";
+import { RoomInterface } from "@/interfaces/room.interface";
+import { NotFoundError, ForbiddenError } from "@/errors";
 
 export class DeleteRoomUseCase {
   constructor(private readonly roomRepository: RoomInterface) {}

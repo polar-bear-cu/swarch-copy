@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
-import { Room } from "../entities/room.entity";
-import { RoomInterface } from "../interfaces/room.interface";
+import { Room } from "@/entities/room.entity";
+import { RoomInterface } from "@/interfaces/room.interface";
 
 export class RoomRepository implements RoomInterface {
   private readonly rooms = new Map<string, Room>();

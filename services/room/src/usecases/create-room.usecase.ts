@@ -1,5 +1,5 @@
-import { RoomInterface } from "../interfaces/room.interface";
-import { ValidationError } from "../errors";
+import { RoomInterface } from "@/interfaces/room.interface";
+import { ValidationError } from "@/errors";
 
 export class CreateRoomUseCase {
   constructor(private readonly roomRepository: RoomInterface) {}

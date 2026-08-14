@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { roomController } from "../controllers/room.controller";
+import { roomController } from "@/controllers/room.controller";
 
 export const roomRoutes = Router();
 
@@ -75,7 +75,7 @@ roomRoutes.get("/:id", roomController.getById);
  *         schema:
  *           type: string
  *     responses:
- *       204:
+ *       200:
  *         description: Room deleted
  *       403:
  *         description: Not the owner
